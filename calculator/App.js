@@ -3,123 +3,216 @@ import { AppRegistry, Text, View, TouchableHighlight, StyleSheet } from 'react-n
 import { Constants } from 'expo';
 
 export default class App extends Component {
-   state = {
-        teamOneScore: 0,
-        teamTwoScore: 0,
-    }
+  state = {
+    prevNumber: 0,
+    currNumber: 0,
+  }
 
-    teamOneTouchdown = () => {
-        this.setState({
-            teamOneScore: this.state.teamOneScore + 7,
-        })
-    }
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.appTitle}>
+          Calculator
+        </Text>
+        <View style={styles.displayContainer}>
+          <Text style={styles.displayNumber}>
+            {this.state.currNumber}
+          </Text>
+        </View>
 
-    teamOneFieldGoal = () => {
-        this.setState({
-            teamOneScore: this.state.teamOneScore + 3,
-        })
-    }
+        <View style={styles.rowContainer}>
+          <TouchableHighlight
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>
+              AC
+            </Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>
+              +/-
+            </Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>
+              %
+            </Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>
+              /
+            </Text>
+          </TouchableHighlight>
+        </View>
 
-    teamTwoTouchdown = () => {
-        this.setState({
-           teamTwoScore: this.state.teamTwoScore + 7,
-        })
-    }
+        <View style={styles.rowContainer}>
+          <TouchableHighlight
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>
+              7
+            </Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>
+              8
+            </Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>
+              9
+            </Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>
+              x
+            </Text>
+          </TouchableHighlight>
+        </View>
 
-    teamTwoFieldGoal = () => {
-        this.setState({
-            teamTwoScore: this.state.teamTwoScore + 3,
-        })
+        <View style={styles.rowContainer}>
+          <TouchableHighlight
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>
+              4
+            </Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>
+              5
+            </Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>
+              6
+            </Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>
+              -
+            </Text>
+          </TouchableHighlight>
+        </View>
 
-    }
+        <View style={styles.rowContainer}>
+          <TouchableHighlight
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>
+              1
+            </Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>
+              2
+            </Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>
+              3
+            </Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>
+              +
+            </Text>
+          </TouchableHighlight>
+        </View>
 
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text style={styles.paragraph}>
-                    FOOTBALL SCOREKEEPER
-                </Text>
+        <View style={styles.rowContainer}>
+          <TouchableHighlight
+            style={styles.zeroButton}
+          >
+            <Text style={styles.buttonText}>
+              0
+            </Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>
+              .
+            </Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>
+              =
+            </Text>
+          </TouchableHighlight>
+        </View>
 
-                <View style={styles.buttonContainer}>
-                    <TouchableHighlight
-                        style={styles.button}
-                        onPress={this.teamOneTouchdown}
-                    >
-                        <Text style={styles.buttonText}>
-                            TEAM 1 TOUCHDOWN!
-                        </Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        style={styles.button}
-                        onPress={this.teamOneFieldGoal}
-                    >
-                        <Text style={styles.buttonText}>
-                            TEAM 1 FIELD GOAL!
-                        </Text>
-                    </TouchableHighlight>
-                </View>
-
-                <View style={styles.buttonContainer}>
-                    <TouchableHighlight
-                        style={styles.button}
-                        onPress={this.teamTwoTouchdown}
-                    >
-                        <Text style={styles.buttonText}>
-                            TEAM 2 TOUCHDOWN!
-                        </Text>
-                    </TouchableHighlight>
-
-                    <TouchableHighlight
-                        style={styles.button}
-                        onPress={this.teamTwoFieldGoal}
-                    >
-                        <Text style={styles.buttonText}>
-                            TEAM 2 FIELD GOAL!
-                        </Text>
-                    </TouchableHighlight>
-                </View>
-
-                <Text style={styles.paragraph}>
-                    Team 1: {this.state.teamOneScore}
-                </Text>
-
-                <Text style={styles.paragraph}>
-                    Team 2: {this.state.teamTwoScore}
-                </Text>
-
-            </View>
-      );
-   }
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'green',
-    },
-    paragraph: {
-        color: 'white',
-        fontSize: 20,
-        textAlign: 'center',
-        fontWeight: 'bold',
-    },
-    buttonContainer: {
-        flexDirection: 'row',
-
-    },
-    button: {
-        height: 50,
-        width: 80,
-        backgroundColor: 'green',
-        borderColor: 'white',
-        borderWidth: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    buttonText: {
-        color: 'white',
-        fontSize: 10,
-    },
+  container: {
+    flex: 1,
+  },
+  appTitle: {
+    marginTop: 20,
+    textAlign: 'center',
+    fontFamily: 'Avenir',
+    color: 'black',
+  },
+  displayContainer: {
+    height: '14%',
+    backgroundColor: 'black',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+  },
+  displayNumber: {
+    marginRight: 20,
+    fontFamily: 'Avenir',
+    fontSize: 52,
+    color: 'aquamarine',
+  },
+  rowContainer: {
+    height: '16%',
+    flexDirection: 'row',
+    backgroundColor: 'black',
+  },
+  button: {
+    width: '25%',
+    borderWidth: 1,
+    borderColor: 'aquamarine',
+  },
+  zeroButton: {
+    width: '50%',
+    borderWidth: 1,
+    borderColor: 'aquamarine',
+  },
+  buttonText: {
+    textAlign: 'center',
+    fontSize: 42,
+    color: 'aquamarine',
+  },
 });
