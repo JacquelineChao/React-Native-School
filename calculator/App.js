@@ -1,171 +1,157 @@
+//import
 import React, { Component } from 'react';
 import { AppRegistry, Text, View, TouchableHighlight, StyleSheet } from 'react-native';
 import { Constants } from 'expo';
 
+//export
 export default class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.appendDigit = this.appendDigit.bind(this);
+    this.addDigit = this.addDigit.bind(this);
+  }
+
   state = {
     prevNumber: 0,
     currNumber: 0,
+
+    operator: '+',
+  }
+
+  //function
+  clear = () => {
+    this.setState({
+      prevNumber: 0,
+      currNumber: 0,
+
+      operator: '+',
+    })
+  }
+
+  switchSign = () => {
+    this.setState({
+      currNumber: this.state.currNumber * -1,
+    })
+  }
+
+  percent = () => {
+    this.setState({
+      currNumber: this.state.currNumber * 0.01,
+    })
+  }
+
+  appendDigit = (digit) => {
+    this.setState({
+      currNumber: this.state.currNumber * 10 + digit,
+    })
+  }
+
+  addDigit = (digit) => {
+    this.setState({
+      prevNumber: this.state.currNumber,
+      currNumber: 0,
+
+      operator: digit,
+    })
+  }
+
+  subtractDigit = (digit) => {
+    this.setState({
+      prevNumber: this.state.currNumber,
+      currNumber: 0,
+
+      operator: digit,
+    })
+  }
+
+  multiplyDigit = (digit) => {
+    this.setState({
+      prevNumber: this.state.currNumber,
+      currNumber: 0,
+
+      operator: digit,
+    })
+  }
+
+  divideDigit = (digit) => {
+    this.setState({
+      prevNumber: this.state.currNumber,
+      currNumber: 0,
+
+      operator: digit,
+    })
+  }
+
+  equals = () => {
+    if (this.state.operator === '+') {
+      this.setState({
+        currNumber: this.state.prevNumber + this.state.currNumber,
+      })
+    } else if (this.state.operator === '-') {
+      this.setState({
+        currNumber: this.state.prevNumber - this.state.currNumber,
+      })
+    } else if (this.state.operator === 'x') {
+      this.setState({
+        currNumber: this.state.prevNumber * this.state.currNumber,
+      })
+    } else if (this.state.operator === '/') {
+      this.setState({
+        currNumber: this.state.prevNumber / this.state.currNumber,
+      })
+    }
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.appTitle}>
-          Calculator
-        </Text>
+
         <View style={styles.displayContainer}>
-          <Text style={styles.displayNumber}>
+          <Text style={styles.symbolText}>
             {this.state.currNumber}
           </Text>
         </View>
 
         <View style={styles.rowContainer}>
-          <TouchableHighlight
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>
-              AC
-            </Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>
-              +/-
-            </Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>
-              %
-            </Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>
-              /
-            </Text>
-          </TouchableHighlight>
+          <Symbol sym='AC' updateDigit={this.clear}/>
+          <Symbol sym='+/-' updateDigit={this.switchSign}/>
+          <Symbol sym='%' updateDigit={this.percent}/>
+          <Symbol sym='/' updateDigit={this.divideDigit}/>
         </View>
 
         <View style={styles.rowContainer}>
-          <TouchableHighlight
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>
-              7
-            </Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>
-              8
-            </Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>
-              9
-            </Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>
-              x
-            </Text>
-          </TouchableHighlight>
+          <Symbol sym={7} updateDigit={this.appendDigit}/>
+          <Symbol sym={8} updateDigit={this.appendDigit}/>
+          <Symbol sym={9} updateDigit={this.appendDigit}/>
+          <Symbol sym='x' updateDigit={this.multiplyDigit}/>
         </View>
 
         <View style={styles.rowContainer}>
-          <TouchableHighlight
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>
-              4
-            </Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>
-              5
-            </Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>
-              6
-            </Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>
-              -
-            </Text>
-          </TouchableHighlight>
+          <Symbol sym={4} updateDigit={this.appendDigit}/>
+          <Symbol sym={5} updateDigit={this.appendDigit}/>
+          <Symbol sym={6} updateDigit={this.appendDigit}/>
+          <Symbol sym='-' updateDigit={this.subtractDigit}/>
         </View>
 
         <View style={styles.rowContainer}>
-          <TouchableHighlight
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>
-              1
-            </Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>
-              2
-            </Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>
-              3
-            </Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>
-              +
-            </Text>
-          </TouchableHighlight>
+          <Symbol sym={1} updateDigit={this.appendDigit}/>
+          <Symbol sym={2} updateDigit={this.appendDigit}/>
+          <Symbol sym={3} updateDigit={this.appendDigit}/>
+          <Symbol sym='+' updateDigit={this.addDigit}/>
         </View>
 
         <View style={styles.rowContainer}>
           <TouchableHighlight
             style={styles.zeroButton}
+            onPress={() => this.appendDigit(0)}
           >
-            <Text style={styles.buttonText}>
+            <Text style={styles.symbolText}>
               0
             </Text>
           </TouchableHighlight>
-          <TouchableHighlight
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>
-              .
-            </Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>
-              =
-            </Text>
-          </TouchableHighlight>
+          <Symbol sym='.' updateDigit={this.decimal}/>
+          <Symbol sym='=' updateDigit={this.equals}/>
         </View>
 
       </View>
@@ -173,46 +159,62 @@ export default class App extends Component {
   }
 }
 
+//prop
+class Symbol extends Component {
+  render() {
+    return (
+      <View style={{alignItems: 'center'}}>
+        <TouchableHighlight
+          style={styles.button}
+          onPress={() => {
+            this.props.updateDigit(this.props.sym);
+          }}
+        >
+          <Text style={styles.symbolText}>
+            {this.props.sym}
+          </Text>
+        </TouchableHighlight>
+      </View>
+    );
+  }
+}
+
+//style
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  appTitle: {
-    marginTop: 20,
-    textAlign: 'center',
-    fontFamily: 'Avenir',
-    color: 'black',
+    backgroundColor: 'lightpink',
   },
   displayContainer: {
-    height: '14%',
-    backgroundColor: 'black',
+    flex: 4,
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
   },
-  displayNumber: {
-    marginRight: 20,
-    fontFamily: 'Avenir',
-    fontSize: 52,
-    color: 'aquamarine',
-  },
   rowContainer: {
-    height: '16%',
+    flex: 2,
     flexDirection: 'row',
-    backgroundColor: 'black',
   },
   button: {
-    width: '25%',
-    borderWidth: 1,
-    borderColor: 'aquamarine',
+    width: 80,
+    marginLeft: 10,
+    borderWidth: 4,
+    borderRadius: 360,
+    borderColor: 'white',
   },
   zeroButton: {
-    width: '50%',
-    borderWidth: 1,
-    borderColor: 'aquamarine',
+    width: 170,
+    height: 75,
+    marginLeft: 10,
+    borderWidth: 4,
+    borderRadius: 360,
+    borderColor: 'white',
   },
-  buttonText: {
+  symbolText: {
+    fontFamily: 'Avenir',
+    fontSize: 52,
     textAlign: 'center',
-    fontSize: 42,
-    color: 'aquamarine',
-  },
+    color: 'white',
+  }
 });
+
+//Problem? Button widths and heights are defined.
